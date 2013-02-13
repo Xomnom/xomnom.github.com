@@ -1,0 +1,16 @@
+<html>
+<head><title>Ford-Johnson algorithm</title></head>
+<body>
+<p><a href="preference.html">Preference Revealer</a> (<a href="https://github.com/Xomnom/Preference-Revealer">on GitHub</a>) uses the Ford-Johnson algorithm, a.k.a. merge insertion, as described in Knuth's <i>The Art of Computer Programming, vol. 3: Sorting and Searching</i>.</p>
+<p>Its worst-case makes fewer comparisons than merge sort's.  According to my rather hasty calculations, its average-case also tends to make one or two percent fewer.  Naturally, it probably can't beat most merge sort implementations' best-case (i.e. minimum) comparisons.  Its overhead makes it unsuitable for most practical applications.</p>
+<p>Here I'll describe enough of the algorithm to determine it, but see Knuth for more details.</p>
+<blockquote><p>First, we group all the items into pairs, and compare each pair to find the higher item; there may be an odd one out, which we'll get back to.</p>
+<p>Then, we recur the algorithm to sort the pairs by their higher items.  After that finishes, call the sequence of higher items the main chain; its elements are initially a<sub>1</sub> through a<sub>k</sub>, where a<sub>k</sub> is the highest of the higher items.</p>
+<p>It remains to insert the lower items into the main chain using binary insertion.</p>
+<p>We'll continue to call the higher items as a<sub>1</sub> through a<sub>n</sub> regardless of shifts in position.  We'll call the corresponding lower items b<sub>1</sub> through b<sub>n</sub>.  For each b<sub>i</sub>, the lowest possible insertion position is at the bottom, and the highest is right under a<sub>i</sub>, wherever that happens to be.  So if we had an odd item, it makes sense now to call it b<sub>n+1</sub>, befitting where it could possibly be inserted.</p>
+<p>It turns out that a very efficient ordering is to insert b<sub>1</sub> for free, then insert as many items as possible for at most two comparisons each (b<sub>3</sub> then b<sub>2</sub>, because after b<sub>2</sub> it might cost three for b<sub>3</sub>), then as many as possible for at most three each (b<sub>5</sub> then b<sub>4</sub>), then for four (b<sub>11</sub> down to b<sub>6</sub>), and so on, skipping nonexisting b<sub>i</sub>, until done.</p></blockquote>
+<p>To check your understanding of the algorithm, try following <a href="preference.html">Preference Revealer</a> along on pencil and paper.  Optionally, you can save <a href="https://github.com/Xomnom/Preference-Revealer">the files</a> locally and comment out the one-liner that shuffles the initial input.</p>
+<p>One other tricky portion is the code that keeps track of where the a<sub>i</sub> get shifted.  A conservative estimate would preserve the worst-case performance, but by updating the highest possible insertion position based on where the previous insertions actually go, a few comparisons can be spared here and there, which presumably also is presumed by Knuth when he calculates the average-case.</p>
+<p><h6><a href="http://xomnom.com">Xomnom</a><br>2012-9-18</h6></p>
+</body>
+</html>
