@@ -1,0 +1,22 @@
+Anagrams XChat script game instructions by Xomnom
+  last modified: 2010 Feb. 25
+
+To start a game, type:
+
+  !anag
+
+To stop, type:
+
+  !quit
+
+To claim a word, e.g. 'word', from the free tiles, type (case-insensitive):
+
+  =word
+
+To claim a word, e.g. 'world', from a combination of words and free tiles, type:
+
+  =world word
+
+Each word is worth the sum of its letters' Scrabble values plus the square of three less than its length.
+The dictionary contains words between four and fifteen letters, inclusive.
+Wildcards and ten random tiles are omitted from each game.
